@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas | Bruno Silveira</title>
+    <style>
+        :root {
+            --cor-bg-main: #050a14;
+            --cor-bg-card: #0b1221;
+            --cor-secundaria: #00d2ff; /* Ciano para este app */
+            --cor-texto: #e2e8f0;
+            --cor-borda: #1e293b;
+        }
+
+        body {
+            background-color: var(--cor-bg-main);
+            color: var(--cor-texto);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--cor-secundaria);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--cor-secundaria);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .todo-card {
+            background-color: var(--cor-bg-card);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.1);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            flex: 1;
+            background: #020617;
+            border: 1px solid var(--cor-borda);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--cor-secundaria);
+        }
+
+        button.add-btn {
+            background: var(--cor-secundaria);
+            color: #000;
+            border: none;
+            padding: 0 20px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button.add-btn:hover {
+            background: white;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+            transition: background 0.2s;
+        }
+
+        li:last-child { border-bottom: none; }
+
+        li:hover {
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        .actions span {
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+
+        .check { color: var(--cor-secundaria); }
+        .del { color: #ef4444; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <center><h2>Minhas Tarefas</h2></center>
+        
+        <div class="todo-card">
+            <div class="input-group">
+                <input type="text" id="todo-input" placeholder="O que preciso fazer?">
+                <button class="add-btn" onclick="addTodo()">+</button>
+            </div>
+
+            <ul id="todo-list">
+                <!-- Exemplo Inicial -->
+                <li>
+                    <span>Escreva novas tarefas :)</span>
+                    <div class="actions">
+                        <span class="check" onclick="toggleTask(this)">✔</span>
+                        <span class="del" onclick="deleteTask(this)">✖</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const todoInput = document.getElementById("todo-input");
+        const todoList = document.getElementById("todo-list");
+
+        function addTodo() {
+            const text = todoInput.value;
+            if (text.trim() === "") return;
+
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span class="text">${text}</span>
+                <div class="actions">
+                    <span class="check" onclick="toggleTask(this)">✔</span>
+                    <span class="del" onclick="deleteTask(this)">✖</span>
+                </div>
+            `;
+            todoList.appendChild(li);
+            todoInput.value = "";
+        }
+
+        function toggleTask(el) {
+            const li = el.closest('li');
+            const span = li.querySelector('.text');
+            if (span.style.textDecoration === 'line-through') {
+                span.style.textDecoration = 'none';
+                span.style.opacity = '1';
+            } else {
+                span.style.textDecoration = 'line-through';
+                span.style.opacity = '0.5';
+            }
+        }
+
+        function deleteTask(el) {
+            el.closest('li').remove();
+        }
+
+        todoInput.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") addTodo();
+        });
+    </script>
+</body>
+</html>
