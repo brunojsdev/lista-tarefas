@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="icon" type="image/png" sizes="48x48" href="./img/fiport.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas | Bruno Silveira</title>
@@ -27,7 +26,8 @@
 
         .container {
             width: 100%;
-            max-width: 400px;
+            /* AUMENTADO: de 400px para 600px para ficar maior na tela */
+            max-width: 600px; 
             padding: 20px;
         }
 
@@ -90,7 +90,7 @@
         li {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center; /* Centraliza verticalmente */
             padding: 12px;
             border-bottom: 1px solid var(--cor-borda);
             transition: background 0.2s;
@@ -100,6 +100,21 @@
 
         li:hover {
             background: rgba(0, 210, 255, 0.05);
+        }
+
+        /* CORREÇÃO DO TEXTO: */
+        li .text {
+            flex: 1; /* Ocupa todo o espaço disponível */
+            word-break: break-all; /* Quebra palavras gigantes/repetidas */
+            margin-right: 15px; /* Espaço entre o texto e os botões */
+            line-height: 1.4;
+        }
+
+        /* CORREÇÃO DOS BOTÕES: */
+        .actions {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0; /* Impede que os botões sejam esmagados */
         }
 
         .actions span {
@@ -153,7 +168,7 @@
             <ul id="todo-list">
                 <!-- Exemplo Inicial -->
                 <li>
-                    <span>Escreva novas tarefas :)</span>
+                    <span class="text">Escreva novas tarefas :)</span>
                     <div class="actions">
                         <span class="check" onclick="toggleTask(this)">✔</span>
                         <span class="del" onclick="deleteTask(this)">✖</span>
@@ -162,7 +177,7 @@
             </ul>
         </div>
 
-        <!-- Botão Voltar Adicionado -->
+        <!-- Botão Voltar -->
         <center>
             <a href="https://brunojsdev.github.io/meu-portfolio/#" class="btn-voltar">← Voltar ao Início</a>
         </center>
@@ -177,6 +192,7 @@
             if (text.trim() === "") return;
 
             const li = document.createElement("li");
+            // Adicionei a classe "text" ao span para o CSS funcionar
             li.innerHTML = `
                 <span class="text">${text}</span>
                 <div class="actions">
