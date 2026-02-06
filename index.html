@@ -3,229 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="icon" type="image/png" href="./img/fi-tarefa.png">
-    
-    <title>Lista de Tarefas | Bruno Silveira</title>
-    <style>
-        :root {
-            --cor-bg-main: #050a14;
-            --cor-bg-card: #0b1221;
-            --cor-secundaria: #00d2ff; /* Ciano para este app */
-            --cor-texto: #e2e8f0;
-            --cor-borda: #1e293b;
-        }
-
-        body {
-            background-color: var(--cor-bg-main);
-            color: var(--cor-texto);
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            width: 100%;
-            /* AUMENTADO: de 400px para 600px para ficar maior na tela */
-            max-width: 600px; 
-            padding: 20px;
-        }
-
-        h2 {
-            text-align: center;
-            color: var(--cor-secundaria);
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--cor-secundaria);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        .todo-card {
-            background-color: var(--cor-bg-card);
-            border: 1px solid var(--cor-borda);
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.1);
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        input {
-            flex: 1;
-            background: #020617;
-            border: 1px solid var(--cor-borda);
-            color: white;
-            padding: 10px;
-            border-radius: 4px;
-            outline: none;
-        }
-
-        input:focus {
-            border-color: var(--cor-secundaria);
-        }
-
-        button.add-btn {
-            background: var(--cor-secundaria);
-            color: #000;
-            border: none;
-            padding: 0 20px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        button.add-btn:hover {
-            background: white;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Centraliza verticalmente */
-            padding: 12px;
-            border-bottom: 1px solid var(--cor-borda);
-            transition: background 0.2s;
-        }
-
-        li:last-child { border-bottom: none; }
-
-        li:hover {
-            background: rgba(0, 210, 255, 0.05);
-        }
-
-        /* CORREÇÃO DO TEXTO: */
-        li .text {
-            flex: 1; /* Ocupa todo o espaço disponível */
-            word-break: break-all; /* Quebra palavras gigantes/repetidas */
-            margin-right: 15px; /* Espaço entre o texto e os botões */
-            line-height: 1.4;
-        }
-
-        /* CORREÇÃO DOS BOTÕES: */
-        .actions {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0; /* Impede que os botões sejam esmagados */
-        }
-
-        .actions span {
-            cursor: pointer;
-            margin-left: 10px;
-            font-size: 1.2rem;
-        }
-
-        .check { color: var(--cor-secundaria); }
-        .del { color: #ef4444; }
-
-        /* Estilo do Botão Voltar */
-        .btn-voltar {
-            margin-top: 30px;
-            padding: 10px 25px;
-            background: transparent;
-            border: 1px solid var(--cor-secundaria);
-            color: var(--cor-secundaria);
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: inline-block;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .btn-voltar:hover {
-            background: var(--cor-secundaria);
-            color: #050a14;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-    </style>
+    <title>Calculadora | Bruno Silveira</title>
+    <link rel="icon" type="image/png" href="img/favicon-calc.png">
+    <!-- Link para o CSS separado -->
+    <link rel="stylesheet" href="calculadora.css">
 </head>
 <body>
-
     <div class="container">
-        <center>
-            <h2>Minhas Tarefas</h2>
-        </center>
-        
-        <div class="todo-card">
-            <div class="input-group">
-                <input type="text" id="todo-input" placeholder="O que preciso fazer?">
-                <button class="add-btn" onclick="addTodo()">+</button>
+        <h2>Calculadora Web</h2>
+        <div class="calculator">
+            <div class="calc-display" id="calc-display">0</div>
+            <div class="calc-keys">
+                <button class="clear" onclick="calcClear()">C</button>
+                <button class="op" onclick="calcAppend('/')">/</button>
+                <button class="op" onclick="calcAppend('*')">x</button>
+                <button class="op" onclick="calcAppend('-')">-</button>
+                
+                <button onclick="calcAppend('7')">7</button>
+                <button onclick="calcAppend('8')">8</button>
+                <button onclick="calcAppend('9')">9</button>
+                <button class="op" onclick="calcAppend('+')">+</button>
+                
+                <button onclick="calcAppend('4')">4</button>
+                <button onclick="calcAppend('5')">5</button>
+                <button onclick="calcAppend('6')">6</button>
+                <button class="op" onclick="calcEqual()">=</button>
+                
+                <button onclick="calcAppend('1')">1</button>
+                <button onclick="calcAppend('2')">2</button>
+                <button onclick="calcAppend('3')">3</button>
+                <button onclick="calcAppend('0')">0</button>
             </div>
-
-            <ul id="todo-list">
-                <!-- Exemplo Inicial -->
-                <li>
-                    <span class="text">Escreva novas tarefas :)</span>
-                    <div class="actions">
-                        <span class="check" onclick="toggleTask(this)">✔</span>
-                        <span class="del" onclick="deleteTask(this)">✖</span>
-                    </div>
-                </li>
-            </ul>
         </div>
-
         <!-- Botão Voltar -->
-        <center>
-            <a href="https://brunojsdev.github.io/meu-portfolio/#" class="btn-voltar">← Voltar ao Início</a>
-        </center>
+        <a href="index.html" class="btn-voltar">← Voltar ao Início</a>
     </div>
 
-    <script>
-        const todoInput = document.getElementById("todo-input");
-        const todoList = document.getElementById("todo-list");
-
-        function addTodo() {
-            const text = todoInput.value;
-            if (text.trim() === "") return;
-
-            const li = document.createElement("li");
-            // Adicionei a classe "text" ao span para o CSS funcionar
-            li.innerHTML = `
-                <span class="text">${text}</span>
-                <div class="actions">
-                    <span class="check" onclick="toggleTask(this)">✔</span>
-                    <span class="del" onclick="deleteTask(this)">✖</span>
-                </div>
-            `;
-            todoList.appendChild(li);
-            todoInput.value = "";
-        }
-
-        function toggleTask(el) {
-            const li = el.closest('li');
-            const span = li.querySelector('.text');
-            if (span.style.textDecoration === 'line-through') {
-                span.style.textDecoration = 'none';
-                span.style.opacity = '1';
-            } else {
-                span.style.textDecoration = 'line-through';
-                span.style.opacity = '0.5';
-            }
-        }
-
-        function deleteTask(el) {
-            el.closest('li').remove();
-        }
-
-        todoInput.addEventListener("keypress", function (e) {
-            if (e.key === "Enter") addTodo();
-        });
-    </script>
+    <!-- Link para o JS separado -->
+    <script src="calculadora.js"></script>
 </body>
 </html>
