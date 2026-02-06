@@ -3,43 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora | Bruno Silveira</title>
-    <link rel="icon" type="image/png" href="img/favicon-calc.png">
-    <!-- Link para o CSS separado -->
-    <link rel="stylesheet" href="calculadora.css">
+    <title>Lista de Tarefas | Bruno Silveira</title>
+    <link rel="icon" type="image/png" href="img/favicon-todo.png">
+    <link rel="stylesheet" href="lista_tarefas.css">
 </head>
 <body>
     <div class="container">
-        <h2>Calculadora Web</h2>
-        <div class="calculator">
-            <div class="calc-display" id="calc-display">0</div>
-            <div class="calc-keys">
-                <button class="clear" onclick="calcClear()">C</button>
-                <button class="op" onclick="calcAppend('/')">/</button>
-                <button class="op" onclick="calcAppend('*')">x</button>
-                <button class="op" onclick="calcAppend('-')">-</button>
-                
-                <button onclick="calcAppend('7')">7</button>
-                <button onclick="calcAppend('8')">8</button>
-                <button onclick="calcAppend('9')">9</button>
-                <button class="op" onclick="calcAppend('+')">+</button>
-                
-                <button onclick="calcAppend('4')">4</button>
-                <button onclick="calcAppend('5')">5</button>
-                <button onclick="calcAppend('6')">6</button>
-                <button class="op" onclick="calcEqual()">=</button>
-                
-                <button onclick="calcAppend('1')">1</button>
-                <button onclick="calcAppend('2')">2</button>
-                <button onclick="calcAppend('3')">3</button>
-                <button onclick="calcAppend('0')">0</button>
+        <center>
+            <h2>Minhas Tarefas</h2>
+        </center>
+        
+        <div class="todo-card">
+            <div class="input-group">
+                <input type="text" id="todo-input" placeholder="O que preciso fazer?">
+                <button class="add-btn" onclick="addTodo()">+</button>
             </div>
+
+            <ul id="todo-list">
+                <!-- Exemplo Inicial -->
+                <li>
+                    <span class="text">Escreva novas tarefas :)</span>
+                    <div class="actions">
+                        <span class="check" onclick="toggleTask(this)">✔</span>
+                        <span class="del" onclick="deleteTask(this)">✖</span>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <!-- Botão Voltar -->
-        <a href="index.html" class="btn-voltar">← Voltar ao Início</a>
+
+        <center>
+            <a href="index.html" class="btn-voltar">← Voltar ao Início</a>
+        </center>
     </div>
 
-    <!-- Link para o JS separado -->
-    <script src="calculadora.js"></script>
+    <script src="lista_tarefas.js"></script>
 </body>
 </html>
