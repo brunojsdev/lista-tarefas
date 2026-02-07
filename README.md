@@ -1,25 +1,19 @@
-# ✅ Lista de Tarefas (Todo List)
+# Lista de Tarefas (Todo List)
 
-Uma aplicação web leve para gerenciamento de tarefas diárias. Permite adicionar, marcar como concluída e excluir tarefas, tudo salvo em memória durante a sessão.
+Aplicação web para gerenciamento de tarefas diárias com foco em usabilidade e design.
 
-## 🚀 Funcionalidades
+## ✅ Funcionalidades
+* Adicionar novas tarefas dinamicamente.
+* Marcar tarefas como concluídas.
+* Excluir tarefas da lista.
+* Layout adaptável que suporta textos longos sem quebrar o design.
 
-* **Adicionar Tarefas:** Campo de entrada simples com botão de adição.
-* **Marcar Conclusão:** Clique no ícone de "check" para riscar a tarefa.
-* **Excluir:** Remova tarefas que não são mais necessárias.
-* **Interface Dinâmica:** Efeitos de hover e transições suaves ao interagir com a lista.
+## 🛠️ Tecnologias
+* HTML5
+* CSS3
+* JavaScript (Manipulação do DOM)
 
-## 🛠️ Tecnologias Utilizadas
-
-* **HTML5:** Estrutura da lista e formulários.
-* **CSS3:** Estilização moderna com foco em usabilidade e contraste (Tema Ciano/Escuro).
-* **JavaScript (Vanilla):** Manipulação do DOM (Document Object Model) para criar elementos HTML dinamicamente.
-
-## 📦 Como usar
-
-1. Baixe o arquivo `lista_tarefas.html`.
-2. Abra no seu navegador.
-3. Digite uma tarefa no campo de texto e pressione "Enter" ou clique no botão `+`.
-
----
-**Desenvolvido por Bruno Silveira**
+## 📂 Arquivos do Projeto
+* lista_tarefas.html
+* lista_tarefas.css
+* lista_tarefas.js
