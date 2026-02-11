@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas | Bruno Silveira</title>
-    <link rel="icon" type="image/png" href="./img/fi-port.png">
+    <link rel="icon" type="image/png" href="img/favicon-todo.png">
     <link rel="stylesheet" href="lista_tarefas.css">
+    <style>
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
+
     <div class="container">
+        <!-- (Conteúdo da lista continua igual...) -->
         <center>
             <h2>Minhas Tarefas</h2>
         </center>
@@ -20,7 +33,6 @@
             </div>
 
             <ul id="todo-list">
-                <!-- Exemplo Inicial -->
                 <li>
                     <span class="text">Escreva novas tarefas :)</span>
                     <div class="actions">
@@ -32,7 +44,7 @@
         </div>
 
         <center>
-            <a href="https://brunojsdev.github.io/meu-portfolio/" class="btn-voltar">← Voltar ao Início</a>
+            <a href="index.html" class="btn-voltar">← Voltar ao Início</a>
         </center>
     </div>
 
