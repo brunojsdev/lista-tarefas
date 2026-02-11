@@ -7,6 +7,7 @@ Aplicação web para gerenciamento de tarefas diárias com foco em usabilidade e
 * Marcar tarefas como concluídas.
 * Excluir tarefas da lista.
 * Layout adaptável que suporta textos longos sem quebrar o design.
+* Fundo animado simulando linhas de caderno com pulsação de opacidade neon.
 
 ## 🛠️ Tecnologias
 * HTML5
