@@ -1,10 +1,10 @@
-// ... (Lógica anterior da Lista) ...
 const todoInput = document.getElementById("todo-input");
 const todoList = document.getElementById("todo-list");
 
 function addTodo() {
     const text = todoInput.value;
     if (text.trim() === "") return;
+
     const li = document.createElement("li");
     li.innerHTML = `
         <span class="text">${text}</span>
@@ -38,7 +38,7 @@ todoInput.addEventListener("keypress", function (e) {
 });
 
 
-// --- ANIMAÇÃO DE FUNDO (LINHAS DE CADERNO) ---
+// --- FUNDO: LINHAS DE CADERNO (ESTÁTICAS COM PULSO) ---
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -48,43 +48,43 @@ let lines = [];
 function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+    initAnimation(); // Recalcula as linhas ao redimensionar
 }
 
-class Line {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        this.y = Math.random() * height;
-        this.speed = Math.random() * 0.5 + 0.1;
-        this.opacity = Math.random() * 0.2 + 0.05;
-        this.width = Math.random() * width * 0.8 + width * 0.2; // Largura variada
-        this.x = (width - this.width) / 2; // Centralizado
+class NotebookLine {
+    constructor(y) {
+        this.y = y;
+        this.opacity = Math.random() * 0.3 + 0.1;
+        this.pulseSpeed = Math.random() * 0.005 + 0.002;
+        this.pulseDir = 1;
     }
 
     update() {
-        this.y += this.speed;
-        if (this.y > height) this.y = -10;
+        // Animação apenas na opacidade (Pulsar)
+        this.opacity += this.pulseSpeed * this.pulseDir;
+        if (this.opacity > 0.4 || this.opacity < 0.05) {
+            this.pulseDir *= -1;
+        }
     }
 
     draw() {
         ctx.beginPath();
-        ctx.moveTo(0, this.y); // Linha ocupa a tela toda horizontalmente
+        ctx.moveTo(0, this.y);
         ctx.lineTo(width, this.y);
-        ctx.strokeStyle = `rgba(0, 210, 255, ${this.opacity})`; // Ciano
-        ctx.lineWidth = 1;
+        // Cor Ciano da paleta (#00d2ff)
+        ctx.strokeStyle = `rgba(0, 210, 255, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
     }
 }
 
 function initAnimation() {
-    resize();
     lines = [];
-    // Linhas espaçadas simulando caderno
-    const count = 25; 
-    for(let i=0; i<count; i++) lines.push(new Line());
-    animate();
+    const spacing = 40; // Espaço entre linhas (como um caderno)
+    // Cria linhas cobrindo toda a altura
+    for(let y = spacing; y < height; y += spacing) {
+        lines.push(new NotebookLine(y));
+    }
 }
 
 function animate() {
@@ -97,4 +97,8 @@ function animate() {
 }
 
 window.addEventListener('resize', resize);
+// Inicializa
+width = canvas.width = window.innerWidth;
+height = canvas.height = window.innerHeight;
 initAnimation();
+animate();
