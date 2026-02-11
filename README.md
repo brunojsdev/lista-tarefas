@@ -18,3 +18,5 @@ Aplicação web para gerenciamento de tarefas diárias com foco em usabilidade e
 * lista_tarefas.html
 * lista_tarefas.css
 * lista_tarefas.js
+* img/: Diretório dedicado exclusivamente ao **favicon** do projeto.
+* README.md: Documentação detalhada sobre o projeto.
