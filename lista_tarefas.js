@@ -25,73 +25,79 @@ function toggleTask(el) {
 function deleteTask(el) { el.closest('li').remove(); }
 todoInput.addEventListener("keypress", (e) => { if (e.key === "Enter") addTodo(); });
 
-// --- ANIMAÇÃO DE PARTÍCULAS (MESMA DO PORTFÓLIO) ---
+// --- ANIMAÇÃO DE FUNDO (SQUARES / TASKS) ---
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
-let width, height, particles = [];
-const color = '#00d2ff'; // Ciano
+
+let width, height;
+let particles = [];
+
+// Paleta: Ciano (Principal), Vermelho (Delete) e tons neutros
+const colors = ['#00d2ff', '#ef4444', '#1e293b', '#e2e8f0'];
 
 function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    createParticles();
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
 }
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 0.8 - 0.4;
-        this.speedY = Math.random() * 0.8 - 0.4;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x > width) this.x = 0; else if (this.x < 0) this.x = width;
-        if (this.y > height) this.y = 0; else if (this.y < 0) this.y = height;
-    }
-    draw() {
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
+class Square {
+  constructor() {
+    this.init();
+  }
 
-function createParticles() {
-    particles = [];
-    const count = (width * height) / 12000;
-    for (let i = 0; i < count; i++) particles.push(new Particle());
-}
+  init() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height - height;
+    this.size = Math.random() * 15 + 5;
+    this.speed = Math.random() * 2 + 0.5;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.opacity = Math.random() * 0.5 + 0.1;
+  }
 
-function connect() {
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 150) {
-                ctx.strokeStyle = color;
-                ctx.globalAlpha = 1 - (dist / 150);
-                ctx.lineWidth = 0.5;
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.stroke();
-            }
-        }
+  update() {
+    this.y += this.speed;
+    if (this.y > height) {
+      this.init();
+      this.y = -20;
+    }
+  }
+
+  draw() {
+    ctx.globalAlpha = this.opacity;
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(this.x, this.y, this.size, this.size);
+    
+    if (Math.random() > 0.98) {
+       ctx.fillStyle = this.color;
+       ctx.fillRect(this.x, this.y, this.size, this.size);
     }
     ctx.globalAlpha = 1;
+  }
+}
+
+function initParticles() {
+  particles = [];
+  const particleCount = Math.floor(width / 10);
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Square());
+  }
 }
 
 function animate() {
-    ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    connect();
-    requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, width, height);
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
 }
 
-window.addEventListener('resize', resize);
+window.addEventListener('resize', () => {
+  resize();
+  initParticles();
+});
+
 resize();
+initParticles();
 animate();
