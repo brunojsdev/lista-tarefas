@@ -3,27 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet
+    <title>Lista de Tarefas Tech</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="./img/fi-port.png">
+    <!-- Link para o CSS Externo -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Background Animation Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <main class="container">
-        <h1>TASK ORBIT</h1>
+    <!-- Main Application Container -->
+    <main class="app-wrapper">
+        
+        <header class="header-section">
+            <h1>Tech List</h1>
+            <p id="task-counter">Sistema pronto para novas tarefas</p>
+        </header>
 
-        <div class="input-group">
-            <input type="text" id="task-input" placeholder="Adicionar nova missão..." autocomplete="off">
-            <button class="add-btn" id="add-btn">+</button>
-        </div>
+        <section class="input-group">
+            <input type="text" id="new-task-input" placeholder="O que vamos construir hoje?" maxlength="50">
+            <button id="btn-add-task">Adicionar</button>
+        </section>
 
-        <ul id="task-list">
-            </ul>
+        <section class="todo-list" id="main-todo-list">
+            <!-- Tasks will be injected here via JavaScript -->
+        </section>
+
     </main>
 
+    <!-- Link para o JavaScript Externo -->
     <script src="script.js"></script>
 </body>
 </html>
