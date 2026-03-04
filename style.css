@@ -1,17 +1,24 @@
-/* --- PALETA DE CORES --- */
+/* --- PALETAS DE CORES --- */
 :root {
+    /* Cores de fundo (Paleta Dark/Futurista) */
     --fundo-claro: #150136;
     --fundo-medio: #090024;
     --fundo-escuro: #040014;
+
+    /* Cores de destaque (Acentos em Amarelo/Laranja) */
     --destaque-claro: #ffdd00;
     --destaque-medio: #ffaa00;
     --destaque-escuro: #ff9900;
+
+    /* Cores de borda e Neon (Azul/Roxo) */
     --borda-clara: #5752ff;
     --borda-escura: #5a47ff;
+
+    /* Cor principal do texto */
     --textos: #c9e4ff;
 }
 
-/* --- ESTILOS GERAIS --- */
+/* Reset básico para garantir consistência entre navegadores */
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +26,7 @@
     font-family: 'Space Grotesk', sans-serif;
 }
 
+/* Estilização do corpo: centraliza o conteúdo e esconde barras de rolagem externas */
 body {
     background-color: var(--fundo-escuro);
     color: var(--textos);
@@ -26,9 +34,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden; 
 }
 
+/* --- ELEMENTOS DE FUNDO --- */
+/* Canvas que ocupa a tela toda para a animação de partículas */
 #bg-canvas {
     position: fixed;
     top: 0;
@@ -36,139 +46,232 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    pointer-events: none;
+    pointer-events: none; /* Garante que o canvas não bloqueie cliques nos botões */
 }
 
-/* --- CONTAINER PRINCIPAL --- */
-.container {
+/* --- CONTAINER PRINCIPAL (Glassmorphism) --- */
+.app-wrapper {
     position: relative;
     z-index: 1;
     background-color: var(--fundo-medio);
     border: 2px solid var(--borda-clara);
     border-radius: 20px;
-    padding: 2rem;
-    width: 90%;
-    max-width: 450px;
+    padding: 3rem;
+    width: 95%;
+    max-width: 700px; /* Largura expandida para melhor visualização */
+    min-height: 65vh;
+    max-height: 85vh;
+    
+    /* Sombra externa para profundidade e brilho interno (efeito neon) */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 
                 inset 0 0 15px rgba(87, 82, 255, 0.2);
-    backdrop-filter: blur(5px);
+    
+    /* Desfoque de fundo para o efeito de vidro */
+    backdrop-filter: blur(10px);
+    
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
+    transition: transform 0.3s ease;
 }
 
-h1 {
-    font-size: 2rem;
-    color: var(--destaque-claro);
+/* --- CABEÇALHO --- */
+.header-section {
     text-align: center;
-    text-shadow: 0 0 10px rgba(255, 221, 0, 0.3);
-    letter-spacing: -1px;
+}
+
+.header-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--destaque-claro);
+    text-shadow: 0 0 20px rgba(255, 221, 0, 0.3); /* Brilho no título */
+    letter-spacing: -1.5px;
+    margin-bottom: 0.5rem;
+}
+
+.header-section p {
+    font-size: 1rem;
+    color: var(--destaque-escuro);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    opacity: 0.8;
 }
 
 /* --- ÁREA DE INPUT --- */
 .input-group {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
+    background-color: rgba(21, 1, 54, 0.6);
+    padding: 1.2rem;
+    border-radius: 15px;
+    border: 1px solid var(--borda-escura);
 }
 
 .input-group input {
     flex: 1;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
     border: 1px solid var(--borda-escura);
     background-color: var(--fundo-escuro);
     color: var(--textos);
+    font-size: 1.1rem;
     outline: none;
-    transition: 0.3s;
+    transition: all 0.3s;
 }
 
+/* Efeito de foco no input para destacar a interação */
 .input-group input:focus {
     border-color: var(--destaque-claro);
-    box-shadow: 0 0 10px rgba(87, 82, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 221, 0, 0.2);
 }
 
-.add-btn {
+.input-group button {
     background-color: var(--borda-clara);
-    color: white;
+    color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 0 1.2rem;
+    border-radius: 10px;
+    padding: 0 2rem;
     cursor: pointer;
     font-weight: 700;
-    transition: 0.3s;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
 }
 
-.add-btn:hover {
-    background-color: var(--destaque-medio);
-    box-shadow: 0 0 15px var(--destaque-claro);
-    transform: translateY(-2px);
+.input-group button:hover {
+    background-color: var(--borda-escura);
+    box-shadow: 0 0 15px var(--borda-clara);
+    transform: translateY(-2px); /* Efeito de levitação ao passar o mouse */
 }
 
 /* --- LISTA DE TAREFAS --- */
-#task-list {
-    list-style: none;
-    max-height: 400px;
-    overflow-y: auto;
-    padding-right: 5px;
-}
-
-/* Scrollbar estilizada */
-#task-list::-webkit-scrollbar { width: 5px; }
-#task-list::-webkit-scrollbar-thumb { background: var(--borda-clara); border-radius: 10px; }
-
-.task-item {
-    background-color: var(--fundo-claro);
-    border: 1px solid var(--borda-escura);
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 0.8rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    animation: fadeIn 0.3s ease;
-    transition: 0.3s;
-}
-
-.task-item:hover {
-    border-color: var(--destaque-claro);
-}
-
-.task-text {
+.todo-list {
     flex: 1;
-    cursor: pointer;
+    overflow-y: auto; /* Permite rolagem interna se a lista crescer muito */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 10px;
+}
+
+/* Personalização da barra de rolagem (Scrollbar) */
+.todo-list::-webkit-scrollbar {
+    width: 8px;
+}
+.todo-list::-webkit-scrollbar-track {
+    background: rgba(4, 0, 20, 0.5);
+    border-radius: 10px;
+}
+.todo-list::-webkit-scrollbar-thumb {
+    background: var(--borda-escura);
+    border-radius: 10px;
+}
+
+/* Itens individuais da lista */
+.todo-item {
+    background-color: rgba(21, 1, 54, 0.8);
+    border: 1px solid var(--borda-escura);
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    animation: slideIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28); /* Animação de entrada suave */
+    transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+    border-color: var(--destaque-medio);
+    transform: translateX(5px);
+}
+
+/* Estado da tarefa quando está marcada como concluída */
+.todo-item.done {
+    opacity: 0.5;
+    background-color: rgba(4, 0, 20, 0.4);
+}
+
+.todo-item.done .text-content {
+    text-decoration: line-through;
+    color: rgba(201, 228, 255, 0.4);
+}
+
+.text-content {
+    flex: 1;
+    font-size: 1.25rem;
     font-weight: 500;
 }
 
-.task-text.completed {
-    text-decoration: line-through;
-    opacity: 0.5;
-    color: var(--borda-clara);
+/* Botões de ação dentro de cada tarefa */
+.action-btns {
+    display: flex;
+    gap: 0.6rem;
 }
 
-.delete-btn {
-    background: transparent;
-    color: #ff4d4d;
-    border: 1px solid #ff4d4d;
-    border-radius: 5px;
-    padding: 2px 8px;
+.btn-ui {
+    background: var(--fundo-escuro);
+    border: 1px solid var(--borda-escura);
+    color: var(--textos);
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-left: 10px;
-    font-size: 0.8rem;
-    transition: 0.2s;
+    display: grid;
+    place-items: center;
+    font-size: 1.3rem;
+    transition: all 0.2s;
 }
 
-.delete-btn:hover {
-    background: #ff4d4d;
-    color: white;
+/* Cores específicas para as ações de Check e Delete */
+.btn-ui.complete:hover {
+    background: #00ff88;
+    color: #000;
+    border-color: #00ff88;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.btn-ui.remove:hover {
+    background: #ff3366;
+    color: #fff;
+    border-color: #ff3366;
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
-    .container { padding: 1.5rem; }
-    h1 { font-size: 1.6rem; }
+/* Mensagem exibida quando não há tarefas */
+.empty-message {
+    text-align: center;
+    margin-top: 3rem;
+    opacity: 0.4;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes slideIn {
+    from { 
+        opacity: 0; 
+        transform: translateX(-20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
+
+/* --- RESPONSIVIDADE (Mobile) --- */
+@media (max-width: 600px) {
+    .app-wrapper { 
+        padding: 1.5rem; 
+        width: 95%; 
+        min-height: 85vh; 
+    }
+    .header-section h1 { 
+        font-size: 2.5rem; 
+    }
+    .input-group { 
+        flex-direction: column; 
+    }
+    .input-group button { 
+        padding: 1rem; 
+    }
 }
