@@ -1,89 +1,133 @@
-/* --- LÓGICA DA TO-DO LIST --- */
-const input = document.getElementById('task-input');
-const addBtn = document.getElementById('add-btn');
-const taskList = document.getElementById('task-list');
+/* --- 1. TASK MANAGEMENT LOGIC --- */
+let taskDatabase = [
+    { id: 1, text: "Configurar ambiente de desenvolvimento", status: true },
+    { id: 2, text: "Implementar design responsivo", status: false }
+];
 
-function addTask() {
-    const text = input.value.trim();
-    if (text === '') return;
+const inputField = document.getElementById('new-task-input');
+const addButton = document.getElementById('btn-add-task');
+const listContainer = document.getElementById('main-todo-list');
+const counterText = document.getElementById('task-counter');
 
-    const li = document.createElement('li');
-    li.className = 'task-item';
-    li.innerHTML = `
-        <span class="task-text">${text}</span>
-        <button class="delete-btn">Excluir</button>
-    `;
+// Update UI based on current data
+function updateUI() {
+    listContainer.innerHTML = '';
 
-    // Clique para marcar como concluída
-    li.querySelector('.task-text').addEventListener('click', function() {
-        this.classList.toggle('completed');
-    });
-
-    // Clique para excluir
-    li.querySelector('.delete-btn').addEventListener('click', function() {
-        li.style.opacity = '0';
-        setTimeout(() => li.remove(), 300);
-    });
-
-    taskList.prepend(li);
-    input.value = '';
-    input.focus();
+    if (taskDatabase.length === 0) {
+        listContainer.innerHTML = '<p class="empty-message">Nenhum processo ativo no momento...</p>';
+    } else {
+        taskDatabase.forEach(item => {
+            const row = document.createElement('div');
+            row.className = `todo-item ${item.status ? 'done' : ''}`;
+            
+            row.innerHTML = `
+                <div class="text-content">${item.text}</div>
+                <div class="action-btns">
+                    <button class="btn-ui complete" onclick="toggleStatus(${item.id})" title="Finalizar">
+                        ${item.status ? '⟲' : '✓'}
+                    </button>
+                    <button class="btn-ui remove" onclick="removeItem(${item.id})" title="Remover">
+                        ✕
+                    </button>
+                </div>
+            `;
+            listContainer.appendChild(row);
+        });
+    }
+    updateCounter();
 }
 
-addBtn.addEventListener('click', addTask);
-input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') addTask();
-});
+// Update task counter
+function updateCounter() {
+    const pending = taskDatabase.filter(t => !t.status).length;
+    const total = taskDatabase.length;
+    counterText.textContent = `${pending} tarefas pendentes de ${total} totais`;
+}
 
-/* --- ANIMAÇÃO DO CANVAS --- */
+// Add new task function
+function addNewTask() {
+    const val = inputField.value.trim();
+    if (val) {
+        taskDatabase.unshift({
+            id: Date.now(),
+            text: val,
+            status: false
+        });
+        inputField.value = '';
+        updateUI();
+    }
+}
+
+// Toggle task status
+function toggleStatus(id) {
+    taskDatabase = taskDatabase.map(t => t.id === id ? {...t, status: !t.status} : t);
+    updateUI();
+}
+
+// Remove task
+function removeItem(id) {
+    taskDatabase = taskDatabase.filter(t => t.id !== id);
+    updateUI();
+}
+
+// Listeners
+addButton.addEventListener('click', addNewTask);
+inputField.addEventListener('keypress', (e) => e.key === 'Enter' && addNewTask());
+
+
+/* --- 2. BACKGROUND CANVAS ANIMATION --- */
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
-let width, height, particles = [];
-const colors = [ '#ffdd00', '#ffaa00', '#ff9900', '#5752ff', '#c9e4ff' ];
+let w, h;
+let elements = [];
+const themeColors = [ '#ffdd00', '#ffaa00', '#5752ff', '#c9e4ff' ];
 
-function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+function initCanvas() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    elements = [];
+    const count = Math.floor(w / 12);
+    for (let i = 0; i < count; i++) elements.push(new Particle());
 }
 
-class Square {
-    constructor() { this.init(); }
-    init() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height - height;
-        this.size = Math.random() * 15 + 5;
-        this.speed = Math.random() * 2 + 0.5;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.opacity = Math.random() * 0.8 + 0.4;
+class Particle {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h - h;
+        this.size = Math.random() * 12 + 4;
+        this.v = Math.random() * 1.5 + 0.5;
+        this.color = themeColors[Math.floor(Math.random() * themeColors.length)];
+        this.alpha = Math.random() * 0.5 + 0.2;
     }
     update() {
-        this.y += this.speed;
-        if (this.y > height) { this.init(); this.y = -20; }
+        this.y += this.v;
+        if (this.y > h) this.reset();
     }
     draw() {
-        ctx.globalAlpha = this.opacity;
+        ctx.globalAlpha = this.alpha;
         ctx.strokeStyle = this.color;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1;
         ctx.strokeRect(this.x, this.y, this.size, this.size);
-        if (Math.random() > 0.98) {
+        if(Math.random() > 0.99) {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.size, this.size);
         }
-        ctx.globalAlpha = 1;
     }
 }
 
-function initParticles() {
-    particles = [];
-    const particleCount = Math.floor(width / 15);
-    for (let i = 0; i < particleCount; i++) particles.push(new Square());
+function loop() {
+    ctx.clearRect(0, 0, w, h);
+    elements.forEach(e => { e.update(); e.draw(); });
+    requestAnimationFrame(loop);
 }
 
-function animate() {
-    ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
-}
+// Event Listeners for Canvas
+window.addEventListener('resize', initCanvas);
 
-window.addEventListener('resize', () => { resize(); initParticles(); });
-resize(); initParticles(); animate();
+// Global Init
+window.onload = () => {
+    initCanvas();
+    loop();
+    updateUI();
+};
