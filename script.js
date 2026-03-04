@@ -80,7 +80,7 @@ const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 let w, h;
 let elements = [];
-const themeColors = [ '#ffdd00', '#ffaa00', '#5752ff', '#c9e4ff' ];
+const themeColors = [ '#bbff00', '#ddff00', '#ffff00', '#ffcc00', '#ffaa00' ];
 
 function initCanvas() {
     w = canvas.width = window.innerWidth;
