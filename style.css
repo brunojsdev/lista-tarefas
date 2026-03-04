@@ -48,6 +48,7 @@ body {
     z-index: 0;
     pointer-events: none; /* Garante que o canvas não bloqueie cliques nos botões */
 }
+
 /* --- ESTILO DO BOTÃO VOLTAR --- */
 .back-portfolio-btn {
     position: fixed;      /* Fixa o elemento em relação à janela do navegador */
