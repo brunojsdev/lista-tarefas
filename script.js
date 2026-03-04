@@ -1,7 +1,7 @@
 /* --- 1. TASK MANAGEMENT LOGIC --- */
 let taskDatabase = [
-    { id: 1, text: "Configurar ambiente de desenvolvimento", status: true },
-    { id: 2, text: "Implementar design responsivo", status: false }
+    { id: 1, text: "Tarefa concluida ;)", status: true },
+    { id: 2, text: "Escreva uma nova tarefa :D", status: false }
 ];
 
 const inputField = document.getElementById('new-task-input');
