@@ -81,75 +81,99 @@ if (inputField) inputField.addEventListener('keypress', (e) => e.key === 'Enter'
 
 
 /* ==========================================================================
-   2. BACKGROUND CANVAS ANIMATION (STARS)
+   2. ANIMAÇÃO DE FUNDO (CANVAS STARS)
+   Cria um efeito de estrelas de 4 pontas curvadas (Estilo Ouros)
    ========================================================================== */
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
+// Variáveis globais de controle do Canvas
 let width, height;
 let particles = [];
+
+// Paleta de cores da animação
 const colors = ['#bbff00', '#ddff00', '#ffff00', '#ffcc00', '#ffaa00'];
+
+/* --- FUNÇÕES DE CONTROLE DO CANVAS --- */
 
 function resize() {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
 }
 
+/* --- CLASSE PRINCIPAL: STAR (PARTÍCULAS) --- */
 class Star {
   constructor() {
     this.init();
   }
 
+  // Inicializa ou reseta as propriedades da estrela
   init() {
     this.x = Math.random() * width;
     this.y = Math.random() * height; 
-    this.size = Math.random() * 7 + 3;
-    this.speed = Math.random() * 1.5 + 0.5;
+    // Tamanho reduzido para melhor estética
+    this.size = Math.random() * 4 + 3; 
+    this.speed = Math.random() * 1.0 + 0.3;
     this.color = colors[Math.floor(Math.random() * colors.length)];
-    this.opacity = Math.random() * 0.7 + 0.3;
+    this.opacity = Math.random() * 0.5 + 0.3; 
   }
 
+  // Atualiza a posição da partícula a cada frame
   update() {
     this.y += this.speed;
-    if (this.y > height + this.size) {
+    
+    // Se a estrela sair da tela pela parte de baixo, reseta para o topo
+    if (this.y > height + 20) {
       this.x = Math.random() * width;
       this.y = -20;
     }
   }
 
+  // Desenha a estrela de 4 pontas curvada (Gordinha e Esticada)
   draw() {
     ctx.save();
     ctx.translate(this.x, this.y);
+
     ctx.globalAlpha = this.opacity;
-    ctx.strokeStyle = this.color;
-    ctx.lineWidth = 1.2;
     
-    const R_major = this.size;
-    const R_minor = this.size * 0.25;
+    // Proporções estilo Naipe de Ouros
+    const R_y = this.size * 1.8; // Vertical esticada
+    const R_x = this.size * 1.2; // Horizontal gordinha
+    const c = 0.25;              // Controle da curvatura (pontas finas)
 
     ctx.beginPath();
-    for (let i = 0; i < 8; i++) {
-      let angle = (i * Math.PI) / 4 - Math.PI / 2; 
-      let radius = (i % 2 === 0) ? R_major : R_minor;
-      let px = Math.cos(angle) * radius;
-      let py = Math.sin(angle) * radius;
-      if (i === 0) ctx.moveTo(px, py);
-      else ctx.lineTo(px, py);
-    }
+    ctx.moveTo(0, -R_y);
+
+    // Curvas que formam o corpo da estrela
+    ctx.quadraticCurveTo(R_x * c, -R_y * c, R_x, 0);   
+    ctx.quadraticCurveTo(R_x * c, R_y * c, 0, R_y);    
+    ctx.quadraticCurveTo(-R_x * c, R_y * c, -R_x, 0); 
+    ctx.quadraticCurveTo(-R_x * c, -R_y * c, 0, -R_y); 
+    
     ctx.closePath();
+
+    // Estrela Oca por padrão
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 1.2;
     ctx.stroke();
     
-    if (Math.random() > 0.98) {
+    // Efeito de "piscar": preenche a estrela aleatoriamente
+    if (Math.random() > 0.985) {
+       ctx.globalAlpha = 1;
        ctx.fillStyle = this.color;
        ctx.fill();
     }
+    
     ctx.restore();
   }
 }
 
+/* --- INICIALIZAÇÃO E LOOP DE ANIMAÇÃO --- */
+
 function initParticles() {
   particles = [];
   const particleCount = Math.floor(width / 15); 
+  
   for (let i = 0; i < particleCount; i++) {
     particles.push(new Star());
   }
@@ -157,21 +181,23 @@ function initParticles() {
 
 function animate() {
   ctx.clearRect(0, 0, width, height);
+  
   particles.forEach(p => {
     p.update();
     p.draw();
   });
+  
   requestAnimationFrame(animate);
 }
+
+/* --- EVENT LISTENERS --- */
 
 window.addEventListener('resize', () => {
   resize();
   initParticles();
 });
 
-/* ==========================================================================
-   3. START DO SCRIPT (O QUE FAZ TUDO APARECER AO CARREGAR)
-   ========================================================================== */
+/* --- START DO SCRIPT --- */
 resize();         
 initParticles();  
 animate();
