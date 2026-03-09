@@ -58,6 +58,7 @@ body {
     height: 100vh;
     z-index: 0;
     pointer-events: none; /* Garante que o canvas não bloqueie cliques nos botões */
+    opacity: 0.40;
 }
 
 /* --- ESTILO DO BOTÃO VOLTAR --- */
