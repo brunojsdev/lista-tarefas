@@ -28,13 +28,24 @@
 
 /* Estilização do corpo: centraliza o conteúdo e esconde barras de rolagem externas */
 body {
-    background-color: var(--fundo-escuro);
     color: var(--textos);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden; 
+    background: linear-gradient(
+    135deg, 
+    var(--fundo-escuro), 
+    var(--fundo-medio), 
+    var(--fundo-claro), 
+    var(--fundo-medio), 
+    var(--fundo-escuro), 
+    var(--fundo-medio), 
+    var(--fundo-claro), 
+    var(--fundo-medio), 
+    var(--fundo-escuro)
+  );
 }
 
 /* --- ELEMENTOS DE FUNDO --- */
