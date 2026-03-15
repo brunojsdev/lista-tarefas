@@ -18,7 +18,7 @@ function updateUI() {
     listContainer.innerHTML = '';
 
     if (taskDatabase.length === 0) {
-        listContainer.innerHTML = '<p class="empty-message">Nenhum processo ativo no momento...</p>';
+        listContainer.innerHTML = '<p class="empty-message">Nenhuma tarefa no momento...</p>';
     } else {
         taskDatabase.forEach(item => {
             const row = document.createElement('div');
