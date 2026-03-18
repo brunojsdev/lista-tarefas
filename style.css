@@ -307,68 +307,73 @@ body {
 /* ==========================================================================
    RESPONSIVIDADE MOBILE
    ========================================================================== */
-
-/* --- BOTÃO VOLTAR PORTFOLIO --- */
 @media (max-width: 600px) {
-    .back-portfolio-btn {
-        top: 10px;
-        left: 10px;
-        padding: 8px 15px;
-        font-size: 0.8rem;
-    }
     
-    .app-wrapper { 
-        padding: 1.2rem; 
-        width: 95%; 
-        min-height: 85vh; 
-    }
-    
-    .header-section h1 { 
-        font-size: 2.2rem; /* Título reduzido */
-    }
+    /* 1. Ajustes do Botão Voltar (Visível e Ajustado) */
+    .back-portfolio-btn {
+        display: flex;        /* Garante que o botão apareça */
+        top: 10px;            /* Mais próximo do topo */
+        left: 10px;
+        padding: 6px 12px;    /* Redução leve para não ocupar a tela toda */
+        font-size: 0.75rem;
+        gap: 5px;
+    }
 
-    .header-section p {
-        font-size: 0.85rem;
-    }
+    /* 2. Layout Principal */
+    .app-wrapper { 
+        padding: 1.2rem; 
+        width: 95%; 
+        min-height: 80vh; 
+        margin-top: 50px;    /* Espaço para o botão acima do container */
+        gap: 1.5rem;
+    }
+    
+    /* 3. Tipografia e Cabeçalho */
+    .header-section h1 { 
+        font-size: 2.2rem; 
+        margin-bottom: 0.3rem;
+    }
 
-    .input-group { 
-        flex-direction: column; 
-        gap: 0.8rem;
-        padding: 1rem;
-    }
+    .header-section p {
+        font-size: 0.8rem;
+    }
 
-    .input-group input {
-        padding: 0.8rem;
-        font-size: 1rem;
-    }
+    /* 4. Grupo de Entrada (Input + Botão) */
+    .input-group { 
+        flex-direction: column; 
+        gap: 0.8rem;
+        padding: 0.8rem;
+    }
 
-    .input-group button { 
-        padding: 0.8rem; 
-        font-size: 1rem;
-    }
+    .input-group input,
+    .input-group button {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
 
-    /* Redimensionamento dos itens da lista */
-    .todo-list {
-        gap: 0.8rem;
-    }
+    /* 5. Lista de Tarefas e Correção de Texto */
+    .todo-list {
+        gap: 0.8rem;
+    }
 
-    .todo-item {
-        padding: 1rem;
-        gap: 0.8rem;
-    }
+    .todo-item {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
 
-    .text-content {
-        font-size: 1.05rem; /* Fonte da tarefa ajustada para o mobile */
-    }
+    .text-content {
+        font-size: 1rem;
+        /* Correção para tarefas gigantes: força a quebra de linha */
+        word-break: break-word; 
+        overflow-wrap: anywhere;
+        white-space: normal;
+    }
 
-    /* Redimensionamento dos botões de ação */
-    .action-btns {
-        gap: 0.4rem;
-    }
-
-    .btn-ui {
-        width: 36px;
-        height: 36px;
-        font-size: 1.1rem;
-    }
+    /* 6. Botões de Ação (UI) */
+    .btn-ui {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
 }
