@@ -323,13 +323,12 @@ body {
     .app-wrapper { 
         padding: 1.2rem; 
         width: 95%; 
-        /* Altera de 85vh para auto para a borda não "esticar" vazia */
-        min-height: auto; 
+        min-height: auto; /* Altera de 85vh para auto para a borda não "esticar" vazia */
         margin-top: 55px; 
         margin-bottom: 20px; /* Margem inferior para não encostar no rodapé */
         gap: 1.5rem;
-        /* Limita a altura máxima para manter o scroll interno se houver muitas tarefas */
-        max-height: 85vh; 
+        max-height: 85vh; /* Limita a altura máxima para manter o scroll interno se houver muitas tarefas */
+        transform: translateY(-8vh); /* Desloca o bloco inteiro 8% da altura da tela para cima do centro exato */
     }
     
     /* 3. Cabeçalho */
