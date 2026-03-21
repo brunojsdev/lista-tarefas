@@ -1,9 +1,9 @@
 /* --- PALETAS DE CORES --- */
 :root {
     /* Cores de fundo (Paleta Dark/Futurista) */
-    --fundo-claro: #190142;
-    --fundo-medio: #0b002b;
-    --fundo-escuro: #06001c;
+    --fundo-claro: #150136;
+    --fundo-medio: #090024;
+    --fundo-escuro: #040014;
 
     /* Cores de destaque (Acentos em Amarelo/Laranja) */
     --destaque-claro: #ffdd00;
@@ -58,7 +58,7 @@ body {
     height: 100vh;
     z-index: 0;
     pointer-events: none; /* Garante que o canvas não bloqueie cliques nos botões */
-    opacity: 0.50;
+    opacity: 0.35;
 }
 
 /* --- ESTILO DO BOTÃO VOLTAR --- */
