@@ -39,12 +39,12 @@
 
 /* Estilização do corpo: centraliza o conteúdo e esconde barras de rolagem externas */
 body {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  overflow-x: hidden;
   color: var(--textos);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
   background-color: var(--fundo-profundo);
 
   background-image: 
