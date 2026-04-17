@@ -328,7 +328,7 @@ FOOTER (RODAPÉ)
 ========================================================================== */
 footer {
     width: 100%;
-    margin-top: 20px; /* Truque do Flexbox para empurrar para o fim */
+    margin-top: auto;
     padding: 30px 20px;
     font-size: 0.85rem;
     text-align: center;
