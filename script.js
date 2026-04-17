@@ -2,7 +2,7 @@
    1. TASK MANAGEMENT LOGIC
    ========================================================================== */
 let taskDatabase = [
-    { id: 1, text: "Tarefa concluida  (-_-) ", status: true },
+    { id: 1, text: "Tarefa concluida... ", status: true },
 ];
 
 const inputField = document.getElementById('new-task-input');
