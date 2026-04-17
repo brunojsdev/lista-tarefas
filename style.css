@@ -41,7 +41,6 @@
 body {
     color: var(--textos);
     justify-content: center;
-    padding: 80px 0 20px 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column; /* Alinha os blocos verticalmente */
