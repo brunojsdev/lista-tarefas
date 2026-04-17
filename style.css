@@ -126,6 +126,8 @@ body {
     max-width: 700px; /* Largura expandida para melhor visualização */
     min-height: 65vh;
     max-height: 85vh;
+    margin-top: 20px;    /* Espaço para o botão de voltar não cobrir o título */
+    margin-bottom: 10px;
     
     /* Sombra externa para profundidade e brilho interno (efeito neon) */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 
