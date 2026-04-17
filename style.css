@@ -39,14 +39,13 @@
 
 /* Estilização do corpo: centraliza o conteúdo e esconde barras de rolagem externas */
 body {
-    color: var(--textos);
-    justify-content: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column; /* Alinha os blocos verticalmente */
-    align-items: center;
-    overflow-x: hidden; /* Trava o scroll lateral, mas permite o vertical */
-    background-color: var(--fundo-profundo);
+  color: var(--textos);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+  background-color: var(--fundo-profundo);
 
   background-image: 
     /* 1. Sombra no Topo (Mantido exatamente como estava para legibilidade) */
@@ -124,15 +123,21 @@ body {
     border-radius: 20px;
     padding: 3rem;
     width: 95%;
-    max-width: 700px;
-    margin-top: 100px;    /* Espaço para o botão de voltar não cobrir o título */
-    margin-bottom: 50px;  /* Espaço antes do rodapé */
-    min-height: 60vh;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(87, 82, 255, 0.2);
+    max-width: 700px; /* Largura expandida para melhor visualização */
+    min-height: 65vh;
+    max-height: 85vh;
+    
+    /* Sombra externa para profundidade e brilho interno (efeito neon) */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 
+                inset 0 0 15px rgba(87, 82, 255, 0.2);
+    
+    /* Desfoque de fundo para o efeito de vidro */
     backdrop-filter: blur(10px);
+    
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    transition: transform 0.3s ease;
 }
 
 /* --- CABEÇALHO --- */
@@ -326,16 +331,18 @@ body {
 FOOTER (RODAPÉ)
 ========================================================================== */
 footer {
-    width: 100%;
-    margin-top: auto;
-    padding: 30px 20px;
-    font-size: 0.85rem;
-    text-align: center;
-    color: var(--textos);
-    background: var(--fundo-escuro);
-    border-top: 2px solid var(--borda-clara);
-    position: relative;
-    z-index: 2;
+align-self: stretch;
+margin-top: auto;
+margin-left: -20px;
+margin-right: -20px;
+margin-bottom: -15px;
+padding: 30px 20px;
+font-size: 0.85rem;
+text-align: center;
+color: var(--textos);
+background: var(--fundo-escuro);
+border-top: 3px solid transparent;
+border-image: linear-gradient(to right, var(--borda-clara)) 1;
 }
 
 /* ==========================================================================
@@ -360,7 +367,7 @@ footer {
         margin-bottom: 20px; /* Margem inferior para não encostar no rodapé */
         gap: 1.5rem;
         max-height: 85vh; /* Limita a altura máxima para manter o scroll interno se houver muitas tarefas */
-        transform: none; /* Desloca o bloco inteiro 8% da altura da tela para cima do centro exato */
+        transform: translateY(-8vh); /* Desloca o bloco inteiro 8% da altura da tela para cima do centro exato */
     }
     
     /* 3. Cabeçalho */
