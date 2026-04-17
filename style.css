@@ -39,13 +39,13 @@
 
 /* Estilização do corpo: centraliza o conteúdo e esconde barras de rolagem externas */
 body {
-    color: var(--textos);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column; /* Alinha os blocos verticalmente */
-    align-items: center;
-    overflow-x: hidden; /* Trava o scroll lateral, mas permite o vertical */
-    background-color: var(--fundo-profundo);
+  color: var(--textos);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+  background-color: var(--fundo-profundo);
 
   background-image: 
     /* 1. Sombra no Topo (Mantido exatamente como estava para legibilidade) */
@@ -81,7 +81,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 80px 0 20px 0;
+    padding: 10px 20px;
     position: fixed;
     top: 20px;
     left: 20px;
@@ -126,8 +126,6 @@ body {
     max-width: 700px; /* Largura expandida para melhor visualização */
     min-height: 65vh;
     max-height: 85vh;
-    margin-top: 20px;    /* Espaço para o botão de voltar não cobrir o título */
-    margin-bottom: 10px;
     
     /* Sombra externa para profundidade e brilho interno (efeito neon) */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 
@@ -333,16 +331,18 @@ body {
 FOOTER (RODAPÉ)
 ========================================================================== */
 footer {
-    width: 100%;
-    margin-top: auto; /* Truque do Flexbox para empurrar para o fim */
-    padding: 30px 20px;
-    font-size: 0.85rem;
-    text-align: center;
-    color: var(--textos);
-    background: var(--fundo-escuro);
-    border-top: 2px solid var(--borda-clara);
-    position: relative;
-    z-index: 2;
+align-self: stretch;
+margin-top: auto;
+margin-left: -20px;
+margin-right: -20px;
+margin-bottom: -15px;
+padding: 30px 20px;
+font-size: 0.85rem;
+text-align: center;
+color: var(--textos);
+background: var(--fundo-escuro);
+border-top: 3px solid transparent;
+border-image: linear-gradient(to right, var(--borda-clara)) 1;
 }
 
 /* ==========================================================================
