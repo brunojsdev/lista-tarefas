@@ -40,6 +40,7 @@
 /* Estilização do corpo: centraliza o conteúdo e esconde barras de rolagem externas */
 body {
   color: var(--textos);
+  justify-content: center;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -331,18 +332,16 @@ body {
 FOOTER (RODAPÉ)
 ========================================================================== */
 footer {
-align-self: stretch;
-margin-top: auto;
-margin-left: -20px;
-margin-right: -20px;
-margin-bottom: -15px;
-padding: 30px 20px;
-font-size: 0.85rem;
-text-align: center;
-color: var(--textos);
-background: var(--fundo-escuro);
-border-top: 3px solid transparent;
-border-image: linear-gradient(to right, var(--borda-clara)) 1;
+    width: 100%;
+    margin-top: auto; /* Truque do Flexbox para empurrar para o fim */
+    padding: 30px 20px;
+    font-size: 0.85rem;
+    text-align: center;
+    color: var(--textos);
+    background: var(--fundo-escuro);
+    border-top: 2px solid var(--borda-clara);
+    position: relative;
+    z-index: 2;
 }
 
 /* ==========================================================================
