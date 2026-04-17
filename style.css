@@ -39,14 +39,13 @@
 
 /* Estilização do corpo: centraliza o conteúdo e esconde barras de rolagem externas */
 body {
-  color: var(--textos);
-  justify-content: center;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; 
-  background-color: var(--fundo-profundo);
+    color: var(--textos);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Alinha os blocos verticalmente */
+    align-items: center;
+    overflow-x: hidden; /* Trava o scroll lateral, mas permite o vertical */
+    background-color: var(--fundo-profundo);
 
   background-image: 
     /* 1. Sombra no Topo (Mantido exatamente como estava para legibilidade) */
