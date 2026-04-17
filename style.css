@@ -328,6 +328,24 @@ body {
 }
 
 /* ==========================================================================
+FOOTER (RODAPÉ)
+========================================================================== */
+footer {
+align-self: stretch;
+margin-top: auto;
+margin-left: -20px;
+margin-right: -20px;
+margin-bottom: -15px;
+padding: 30px 20px;
+font-size: 0.85rem;
+text-align: center;
+color: var(--textos);
+background: var(--fundo-escuro);
+border-top: 3px solid transparent;
+border-image: linear-gradient(to right, var(--borda-clara)) 1;
+}
+
+/* ==========================================================================
    RESPONSIVIDADE MOBILE
    ========================================================================== */
 @media (max-width: 600px) {
