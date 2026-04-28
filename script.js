@@ -14,7 +14,7 @@
 /* 1. LÓGICA DE NEGÓCIO: Manipulação do banco de dados local e UI */
 
 let taskDatabase = [
-  { id: 1, text: "Tarefa concluida.", status: true },
+  { id: 1, text: "Tarefa concluida.", status: true }
 ];
 
 const inputField = document.getElementById("new-task-input");
