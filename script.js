@@ -7,7 +7,7 @@
      - Configurações e Variáveis
      - Classe Star (Partículas Geométricas)
      - Classe ShootingStar (Cometas)
-     - Ciclo de Animação e Inicialização
+     - Ciclo de Animação e Inicialização 
   ==========================================================================
 */
 
