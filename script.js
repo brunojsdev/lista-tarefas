@@ -14,7 +14,7 @@
 /* 1. LÓGICA DE NEGÓCIO: Manipulação do banco de dados local e UI */
 
 let taskDatabase = [
-  { id: 1, text: "Tarefa concluida.", status: true }
+  { id: 1, text: "Tarefa concluida", status: true },
 ];
 
 const inputField = document.getElementById("new-task-input");
@@ -160,7 +160,7 @@ class Star {
 
     this.x = Math.random() * width;
     this.y = Math.random() * height;
-    
+
     this.baseSpeedX = (Math.random() - 0.5) * 0.1;
     this.baseSpeedY = baseSize * 0.4 + 0.2;
 
@@ -253,11 +253,19 @@ class ShootingStar {
     if (!this.active) return;
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
-    ctx.lineTo(this.x - this.speedX * (this.len / 5), this.y - this.speedY * (this.len / 5));
+    ctx.lineTo(
+      this.x - this.speedX * (this.len / 5),
+      this.y - this.speedY * (this.len / 5),
+    );
     ctx.lineWidth = this.size;
     ctx.lineCap = "round";
 
-    let grad = ctx.createLinearGradient(this.x, this.y, this.x - this.speedX * (this.len / 10), this.y - this.speedY * (this.len / 10));
+    let grad = ctx.createLinearGradient(
+      this.x,
+      this.y,
+      this.x - this.speedX * (this.len / 10),
+      this.y - this.speedY * (this.len / 10),
+    );
     if (document.body.classList.contains("light-mode")) {
       grad.addColorStop(0, `rgba(21, 1, 54, ${this.opacity})`);
       grad.addColorStop(1, `rgba(87, 82, 255, 0)`);
@@ -305,6 +313,6 @@ function animate() {
 
 window.addEventListener("resize", initSpace);
 resize();
-window.refreshSpace(); 
+window.refreshSpace();
 animate();
 updateUI();
